@@ -2,8 +2,8 @@ package unif.type;
 
 /** SimpleType.java
 	*
-	* This is a simple Java Enum class for all types of simple types
-	* @author <a href="mailto:joque@cit.mak.ac.ug">Jose Ghislain Quenum</a>
+	* This is a Java Enum class for all simple types
+	* @author <a href="mailto:joque@me.com">Jose G. Quenum</a>
 	* @version 0.9 - 11/2009
 */
 

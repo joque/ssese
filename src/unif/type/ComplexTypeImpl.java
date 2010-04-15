@@ -2,7 +2,7 @@ package unif.type;
 
 /** ComplexTypeImpl.java
 	*
-	* @author <a href="mailto:joque@cit.mak.ac.ug">Jose Ghislain Quenum</a>
+	* @author <a href="mailto:joque@me.com">Jose Ghislain Quenum</a>
 	* @version 0.9 - 11/2009
 */
 
@@ -14,7 +14,7 @@ public abstract class ComplexTypeImpl implements Type {
 	protected TypeMapper substitutions;
 		
 	public ComplexTypeImpl(final String connectorName){
-		connector = Connector.getTypeConnectorInstance(connectorName);
+		connector = TypeConnector.getTypeConnectorInstance(connectorName);
 		substitutions = TypeMapper.getReference();
 	}
 	

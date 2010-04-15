@@ -21,14 +21,8 @@ public enum TypeConnector {
 		return connectorName;
 	}
 	
-	public int hashCode(){
-		int hashCodeValue = 17;
-		hashCodeValue = (37 * hashCodeValue) + connectorName.hashCode();
-		return hashCodeValue;
-	}
-		
 	public static TypeConnector getTypeConnectorInstance(final String connectorName){
-		final TypeConnector typeConnectorInst = null;		
+		TypeConnector typeConnectorInst = null;		
 		for(TypeConnector typeConnector: TypeConnector.values()){
 			if(connectorName.equals(typeConnector.getConnectorName())){
 				typeConnectorInst = typeConnector;

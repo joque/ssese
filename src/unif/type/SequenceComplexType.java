@@ -2,26 +2,34 @@ package unif.type;
 
 /** SequenceComplexType.java
 	*
-	* @author <a href="mailto:joque@cit.mak.ac.ug">Jose Ghislain Quenum</a>
+	* @author <a href="mailto:joque@me.com">Jose Ghislain Quenum</a>
 	* @version 0.9 - 11/2009
 */
 
 import java.util.HashSet;
 import java.util.Set;
 
-public final class ChoiceComplexType extends ComplexTypeImpl {
+public final class SequenceComplexType extends ComplexTypeImpl {
 	private static final String CLS_NAME = "ComplexTypeImpl";
 	private final TypeList typeElements;
 	
 	
-	public ChoiceComplexType(){
+	public SequenceComplexType(){
 		super("choice");
 		typeElements = new TypeList();
 	}
 	
 	//add equals and hashCode methods
 	
-	public abstract boolean isEquivalentToSimple(final SimpleTypeImpl secondTypeArg){
+	public boolean isEquivalentToSimple(final SimpleTypeImpl secondTypeArg){
+		return false;
+	}
+	
+	public boolean isEquivalentToComplex(final ComplexTypeImpl secondTypeArg){
+		return false;
+	}
+	
+	public boolean checkIntersection(final Type secondTypeArg){
 		return false;
 	}
 	

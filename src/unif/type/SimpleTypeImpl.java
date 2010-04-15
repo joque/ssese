@@ -2,7 +2,7 @@ package unif.type;
 
 /** SimpleTypeImpl.java
 	*
-	* @author <a href="mailto:joque@cit.mak.ac.ug">Jose Ghislain Quenum</a>
+	* @author <a href="mailto:joque@me.com">Jose Ghislain Quenum</a>
 	* @version 0.9 - 11/2009
 */
 
@@ -17,7 +17,7 @@ public final class SimpleTypeImpl implements Type {
 	public SimpleTypeImpl(final String typeName){
 		simpleType = SimpleType.getSimpleTypeInstance(typeName);
 		substitutions = TypeMapper.getReference();
-		dict = SimpeTypeDictionary.getReference();
+		dict = SimpleTypeDictionary.getReference();
 	}
 	
 	public SimpleType getSimpleType(){
@@ -46,7 +46,7 @@ public final class SimpleTypeImpl implements Type {
 		
 	public int hashCode(){
 		int hashCodeValue = 17;
-		if(simpeType != null){
+		if(simpleType != null){
 			hashCodeValue = (37 * hashCodeValue) + simpleType.hashCode();			
 		}
 		
@@ -60,7 +60,7 @@ public final class SimpleTypeImpl implements Type {
 		final String secondTypeClsName = secondTypeArg.getClass().getSimpleName();
 		if(secondTypeClsName.equals(CLS_NAME)) {
 			final SimpleTypeImpl simpleSecondTypeArg = (SimpleTypeImpl) secondTypeArg;
-			return isSimpleTypeEquivalence(simpleSecondTypeArg, substitutions);
+			return isSimpleTypeEquivalence(simpleSecondTypeArg);
 		} else {
 			final ComplexTypeImpl complexSecondTypeArg = (ComplexTypeImpl) secondTypeArg;
 			return complexSecondTypeArg.isEquivalent(this);
@@ -87,12 +87,12 @@ public final class SimpleTypeImpl implements Type {
 	
 	private boolean checkDictionaryEqual(final SimpleTypeImpl simpleTypeI){
 		final SimpleType simpleType = simpleTypeI.getSimpleType();
-		if(simpletype == null){
+		if(simpleType == null){
 			return false;
 		}
 		
-		final String currentDictVal = dict.get(this.simpleType);
-		final String secondDictVal = dict.get(simpleType);
+		final String currentDictVal = dict.getValue(this.simpleType);
+		final String secondDictVal = dict.getValue(simpleType);
 		
 		if ((currentDictVal == null) || (secondDictVal == null)){
 			return false;
@@ -104,33 +104,6 @@ public final class SimpleTypeImpl implements Type {
 			return true;
 		} else {
 			return false;
-		}
-	}
-	
-	
-	//This is an embbeded dictionary for simple types
-	class SimpleTypeDictionary{
-		private final HashMap<SimpleType, String> typeDictionary;
-		private static SimpleTypeDictionary simpleTypeDict = new SimpleTypeDictionary();
-		
-		private SimpleTypeDictionary(){
-			typeDictionary = new HashMap<SimpleType,String>();
-		}
-		
-		public static SimpleTypeDictionary getReference(){
-			return simpleTypeDict;
-		}
-		
-		public void addEntry(final SimpleType mySimpleType, final String value){
-			if(mySimpleType == null){
-				return;
-			}
-
-			typeDictionary.put(mySimpleType, value);
-		}
-		
-		public String getValue(final SimpleType mySimpleType){
-			return typeDictionary.get(mySimpleType);
 		}
 	}
 }

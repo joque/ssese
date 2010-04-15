@@ -2,7 +2,7 @@ package unif.type;
 
 /** TypeMapper.java
 	*
-	* @author <a href="mailto:joque@cit.mak.ac.ug">Jose Ghislain Quenum</a>
+	* @author <a href="mailto:joque@me.com">Jose Ghislain Quenum</a>
 	* @version 0.9 - 11/2009
 */
 
@@ -24,7 +24,7 @@ public final class TypeMapper{
 	}
 	
 	public void addEntry(final Type leftHandType, final Type rightHandType){
-		if(mappings.containsKey(leftHandtype)){
+		if(mappings.containsKey(leftHandType)){
 			Set<? extends Type> vals = mappings.get(leftHandType);
 			vals.add(rightHandType);
 		} else {

@@ -70,19 +70,11 @@ public final class SimpleTypeImpl implements Type {
 	private boolean isSimpleTypeEquivalence(final SimpleTypeImpl simpleSecondTypeArg){
 		boolean equivResult = false;
 		
-		if(checkDirectMapping(simpleSecondTypeArg)){
+		if(checkDictionaryEqual(simpleSecondTypeArg)){
 			equivResult = true;
-		} else {
-			if(checkDictionaryEqual(simpleSecondTypeArg)){
-				equivResult = true;
-			}
 		}
 		
 		return equivResult;
-	}
-	
-	private boolean checkDirectMapping(final SimpleTypeImpl secondType){
-		return substitutions.checkDirectMapping(this, secondType);
 	}
 	
 	private boolean checkDictionaryEqual(final SimpleTypeImpl simpleTypeI){
@@ -100,7 +92,7 @@ public final class SimpleTypeImpl implements Type {
 		
 		if(currentDictVal.equals(secondDictVal)){
 			//should update the mappings
-			substitutions.addEntry(this, simpleTypeI);
+			//substitutions.addEntry(this, simpleTypeI);
 			return true;
 		} else {
 			return false;

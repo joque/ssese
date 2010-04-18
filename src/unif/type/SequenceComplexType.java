@@ -26,6 +26,8 @@ public final class SequenceComplexType extends ComplexTypeImpl {
 	}
 	
 	public boolean isEquivalentToComplex(final ComplexTypeImpl secondTypeArg){
+		//should determine the content of this method as well
+		
 		return false;
 	}
 	

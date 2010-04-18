@@ -25,10 +25,12 @@ public final class AllComplexType extends ComplexTypeImpl {
 	}
 	
 	public boolean isEquivalentToComplex(final ComplexTypeImpl secondTypeArg){
+		//should determine the actual content of this method
 		return false;
 	}
 	
 	public boolean checkIntersection(final Type secondTypeArg){
+		//should determine the actual content of this method		
 		return false;
 	}
 	

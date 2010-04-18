@@ -8,40 +8,37 @@ package unif.type;
 
 import java.util.Map;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+//import java.util.HashSet;
+//import java.util.Set;
 
 public final class TypeMapper{
-	private final HashMap<? extends Type, Set<? extends Type>> mappings;
+	private final HashMap<ComplexTypeImpl, Type> mappings;
 	private static TypeMapper mapper = new TypeMapper();
 	
 	private TypeMapper(){
-		mappings = new HashMap<? extends Type, Set<? extends Type>>();
+		mappings = new HashMap<ComplexTypeImpl, Type>();
 	}
 	
 	public static TypeMapper getReference(){
 		return mapper;
 	}
 	
-	public void addEntry(final Type leftHandType, final Type rightHandType){
-		if(mappings.containsKey(leftHandType)){
-			Set<? extends Type> vals = mappings.get(leftHandType);
-			vals.add(rightHandType);
-		} else {
-			Set<Type> rightVals = new HashSet<Type>();
-			rightVals.add(rightHandType);
-			mappings.put(leftHandType, rightVals);
-		}
+	//Caution! this will erase any previous entry with the same key
+	public void addEntry(final ComplexTypeImpl leftHandType, final Type rightHandType){
+			mappings.put(leftHandType, rightHandType);
 	}
 	
 	//this is the checkMapping1 in the initial implementation
-	public boolean checkDirectMapping(final Type leftHandType, final Type rightHandType){
+	public boolean checkDirectMapping(final ComplexTypeImpl leftHandType, final Type rightHandType){
 		
-		for(Map.Entry<? extends Type,Set<? extends Type>> substEntry: mappings.entrySet()){
-			final Type entryKey = substEntry.getKey();
-			final Set<? extends Type> entryValue = substEntry.getValue();
+		for(Map.Entry<ComplexTypeImpl,Type> substEntry: mappings.entrySet()){
+			final ComplexTypeImpl entryKey = substEntry.getKey();
+			final Type entryValue = substEntry.getValue();
 			//do the check and return the result
 		}
+		
+		//should return the actual result of the method
+		return false;
 	}
 	
 }

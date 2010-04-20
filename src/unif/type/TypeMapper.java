@@ -32,15 +32,20 @@ public final class TypeMapper{
 	
 	//this is the checkMapping1 in the initial implementation
 	public boolean checkDirectMapping(final ComplexTypeImpl leftHandType, final Type rightHandType){
+		boolean result = false;
 		
 		for(Map.Entry<ComplexTypeImpl,Type> substEntry: mappings.entrySet()){
 			final ComplexTypeImpl entryKey = substEntry.getKey();
 			final Type entryValue = substEntry.getValue();
-			//do the check and return the result
+			if((entryKey.equals(leftHandType)) && (entryValue.equals(rightHandType))){
+				result = true;
+				break;
+			} else {
+				continue;
+			}
+			
 		}
-		
-		//should return the actual result of the method
-		return false;
+		return result;
 	}
 	
 }

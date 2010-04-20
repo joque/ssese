@@ -24,6 +24,12 @@ public final class TypeList {
 		return elements;
 	}
 	
+	public int hashCode() {
+		int hashCodeValue = 17;
+		hashCodeValue = (37 * hashCodeValue) + elements.hashCode();			
+		return hashCodeValue;
+	}
+	
 	public boolean equals(Object anotherTypeList){
 		final Class objClass = anotherTypeList.getClass();
 		final String objClassName = objClass.getName();
@@ -33,5 +39,11 @@ public final class TypeList {
 		
 		final TypeList otherTypeList = (TypeList) anotherTypeList;
 		return otherTypeList.getElements().equals(getElements());
+	}
+	
+	public boolean equalSet(final TypeSet aTypeSet){
+		//define the content of the method
+		
+		return false;
 	}
 }

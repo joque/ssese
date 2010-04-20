@@ -18,6 +18,10 @@ public final class AllComplexType extends ComplexTypeImpl {
 		typeElements = new TypeSet();
 	}
 	
+	public TypeSet getElements(){
+		return typeElements;
+	}
+	
 	//add equals and hashCode methods
 	
 	public boolean isEquivalentToSimple(final SimpleTypeImpl secondTypeArg){
@@ -25,8 +29,11 @@ public final class AllComplexType extends ComplexTypeImpl {
 	}
 	
 	public boolean isEquivalentToComplex(final ComplexTypeImpl secondTypeArg){
+		boolean result = false;
+
+		
 		//should determine the actual content of this method
-		return false;
+		return result;
 	}
 	
 	public boolean checkIntersection(final Type secondTypeArg){

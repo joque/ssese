@@ -25,23 +25,25 @@ public final class SimpleTypeImpl implements Type {
 	}
 	
 	public boolean equals(Object object){
+		boolean result = true ;
+		
 		//Simply return false when the current type is null
 		if(this.simpleType == null){
-			return false;
-		}
-		
-		if(! (object instanceof SimpleTypeImpl)){
-			return false;			
-		}
-		
-		final SimpleTypeImpl simpleTypeImplObject = (SimpleTypeImpl) object;
-		final SimpleType simpleTypeObject = simpleTypeImplObject.getSimpleType();
-		
-		if((simpleTypeObject != null) && (simpleTypeObject.getTypeName().equals(simpleType.getTypeName()))){
-			return true;
+			result = false;
 		} else {
-			return false;
+			if(! (object instanceof SimpleTypeImpl)){
+				result =  false;			
+			} else {
+				final SimpleTypeImpl simpleTypeImplObject = (SimpleTypeImpl) object;
+				final SimpleType simpleTypeObject = simpleTypeImplObject.getSimpleType();
+
+				if((simpleTypeObject == null) || (! simpleTypeObject.getTypeName().equals(simpleType.getTypeName()))){
+					result = false;
+				}
+			}
 		}
+		
+		return result;
 	}
 		
 	public int hashCode(){
@@ -90,9 +92,9 @@ public final class SimpleTypeImpl implements Type {
 			return false;
 		}
 		
+		//Any equivalence between simple types is strictly 
+		//determined by the SimpletypeDictionary
 		if(currentDictVal.equals(secondDictVal)){
-			//should update the mappings
-			//substitutions.addEntry(this, simpleTypeI);
 			return true;
 		} else {
 			return false;

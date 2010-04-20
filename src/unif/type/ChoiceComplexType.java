@@ -18,7 +18,33 @@ public final class ChoiceComplexType extends ComplexTypeImpl {
 		typeElements = new TypeSet();
 	}
 	
+	public TypeSet getElements(){
+		return typeElements;
+	}
+	
 	//add equals and hashCode methods
+	
+	public int hashCode() {
+		int hashCodeValue = 17;
+		hashCodeValue = (37 * hashCodeValue) + typeElements.hashCode();			
+		return hashCodeValue;
+	}
+	
+	public boolean equals(final Object secondTypeArg){
+		boolean result = true ;
+		
+		if(! (secondTypeArg instanceof ChoiceComplexType)){
+			result =  false;			
+		} else {
+			final ChoiceComplexType complexTypeObject = (ChoiceComplexType) secondTypeArg;
+			final TypeSet complexTypeObjectElements = complexTypeObject.getElements();
+			
+			if(! complexTypeObjectElements.equals(this.getElements())) {
+				result = false;
+			}
+		}
+		return result;
+	}
 	
 	public boolean isEquivalentToSimple(final SimpleTypeImpl secondTypeArg){
 		boolean equivResult = true;
@@ -31,21 +57,41 @@ public final class ChoiceComplexType extends ComplexTypeImpl {
 	}
 	
 	public boolean checkIntersection(final Type secondArgument){
+		boolean result = false;
 		final Set<Type> myElements = typeElements.getElements();
 		
 		for(Type curEltType: myElements){
 			if(curEltType.equals(secondArgument)){
 				substitutions.addEntry(this, secondArgument);
-				return true;
+				result = true;
+				break;
 			}
 		}
-		return false;
+		return result;
 	}
 	
 	public boolean isEquivalentToComplex(final ComplexTypeImpl secondTypeArg){
-		//Might have to dig a little more
+		boolean result = false;
+		
+		if(this.equals(secondTypeArg)) {
+			result = true;			
+		} else {
+			final String secondTypeClsName = secondTypeArg.getClass().getSimpleName();
+			if(secondTypeClsName.equals(CLS_NAME)){
+				if(checkIntersection(secondTypeArg)){
+					final Type myTypeMapper = substitutions.getValue(this);
+					final Type secondTypeArgMapper = substitutions.getValue(secondTypeArg);
+					
+					if((myTypeMapper != null) && (secondTypeArgMapper != null)) {
+						if(myTypeMapper.equals(secondTypeArgMapper)) {
+							result = true;
+						}
+					}
+				}		
+			}
+		}
 
-		return false;
+		return result;
 	}
 	
 }

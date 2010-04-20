@@ -20,6 +20,12 @@ public final class TypeSet {
 		elements.remove(tComp);
 	}
 	
+	public int hashCode() {
+		int hashCodeValue = 17;
+		hashCodeValue = (37 * hashCodeValue) + elements.hashCode();			
+		return hashCodeValue;
+	}
+	
 	public Set<Type> getElements(){
 		return elements;
 	}

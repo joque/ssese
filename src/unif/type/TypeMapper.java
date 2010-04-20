@@ -28,6 +28,10 @@ public final class TypeMapper{
 			mappings.put(leftHandType, rightHandType);
 	}
 	
+	public Type getValue(final ComplexTypeImpl leftHandType){
+		return mappings.get(leftHandType);
+	}
+	
 	//this is the checkMapping1 in the initial implementation
 	public boolean checkDirectMapping(final ComplexTypeImpl leftHandType, final Type rightHandType){
 		

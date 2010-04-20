@@ -25,8 +25,6 @@ public enum SimpleType {
 		return typeName;
 	}
 	
-	//add a hash code method here
-	
 	public static SimpleType getSimpleTypeInstance(final String typeName){
 		SimpleType simpleTypeInst = null;		
 		for(SimpleType simpleType: SimpleType.values()){

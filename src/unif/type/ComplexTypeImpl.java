@@ -10,12 +10,34 @@ import java.util.HashSet;
 import java.util.Set;
 
 public abstract class ComplexTypeImpl implements Type {
+	protected String name;
 	protected TypeConnector connector;
 	protected TypeMapper substitutions;
 		
 	public ComplexTypeImpl(final String connectorName){
-		connector = TypeConnector.getTypeConnectorInstance(connectorName);
-		substitutions = TypeMapper.getReference();
+		this.connector = TypeConnector.getTypeConnectorInstance(connectorName);
+		this.substitutions = TypeMapper.getReference();
+	}
+	
+	public ComplexTypeImpl(final String name, final String connectorName){
+		this(connectorName);
+		this.name = name;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public void setName(final String name){
+		this.name = name;
+	}
+	
+	public int hashCode() {
+		int hashCodeValue = 17;
+		hashCodeValue = (37 * hashCodeValue) + name.hashCode();
+		hashCodeValue = (37 * hashCodeValue) + connector.hashCode();
+		hashCodeValue = (37 * hashCodeValue) + substitutions.hashCode();	
+		return hashCodeValue;
 	}
 	
 	public boolean isEquivalent(final Type secondTypeArg){

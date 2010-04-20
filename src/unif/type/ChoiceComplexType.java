@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public final class ChoiceComplexType extends ComplexTypeImpl {
-	private static final String CLS_NAME = "ChoiceComplexType";
+	public static final String CLS_NAME = "ChoiceComplexType";
 	private final TypeSet typeElements;	
 	
 	public ChoiceComplexType(){
@@ -22,11 +22,10 @@ public final class ChoiceComplexType extends ComplexTypeImpl {
 		return typeElements;
 	}
 	
-	//add equals and hashCode methods
-	
 	public int hashCode() {
 		int hashCodeValue = 17;
-		hashCodeValue = (37 * hashCodeValue) + typeElements.hashCode();			
+		hashCodeValue = (37 * hashCodeValue) + super.hashCode();	
+		hashCodeValue = (37 * hashCodeValue) + typeElements.hashCode();					
 		return hashCodeValue;
 	}
 	

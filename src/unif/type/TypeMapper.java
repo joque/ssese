@@ -8,8 +8,6 @@ package unif.type;
 
 import java.util.Map;
 import java.util.HashMap;
-//import java.util.HashSet;
-//import java.util.Set;
 
 public final class TypeMapper{
 	private final HashMap<ComplexTypeImpl, Type> mappings;

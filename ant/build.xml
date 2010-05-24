@@ -73,4 +73,9 @@
     <jar destfile="${dist}/transport-${DSTAMP}.jar" basedir="${lib-transport}" manifest="${manifest-dir}/transport.mf"/>
     <symlink link="${lib-dir}/transport.jar" resource="${dist}/transport-${DSTAMP}.jar" overwrite="true"/>
   </target-->
+
+	<taskdef name="scenarioRunner" classname="org.jbehave.ant.ScenarioRunnerTask" classpathref="your.runtime.classpath" />
+	<scenarioRunner scenarioIncludes="**/scenarios/*.java" scenarioExcludes="**/*Steps.java" classLoaderInjected="[true|false]" skip="[true|false]" ignoreFailure="[true|false]" batch="[true|false] scope="[compile|test]" sourceDirectory="[sourceDirectory|src/main/java]" testSourceDirectory="[testSourceDirectory|src/test/java]" />
+	<taskdef name="renderReports" classname="org.jbehave.ant.ReportRendererTask" classpathref="your.runtime.classpath" />
+	<renderReports outputDirectory="${basedir}/target/jbehave-reports" formats="txt,html,xml" templateProperties="defaultFormats=stats\nrenderedDirectory=rendered" />
 </project>

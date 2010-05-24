@@ -3,11 +3,9 @@
   <property name="src-dir" location="src"/>
   <property name="lib-dir" location="lib"/>
   <property name="build-dir" location="ant/build"/>
-  <!--property name="config-resource-dir" location="etc/resources/config"/-->
-  <!--property name="util-resource-dir" location="etc/resources/util"/-->
-  <!--property name="artwork-dir" location="artwork"/-->
   <property name="dist" location="ant/dist"/>
-  <!--property name="manifest-dir" location="etc/manifest"/-->
+  <property name="manifest-dir" location="etc/manifest"/>
+  <property name="jbehave-ant" location="${lib-dir}/jbehave-ant-2.5.7"/>
   <target name="init" description="Initialize the build process...">
     <tstamp/>
     <delete file="${basedir}/log/ant_build.log"/>
@@ -21,61 +19,26 @@
       <fileset dir="${build-dir}" includes="**/*.class"/>
     </delete>
   </target>
-  <!--target name="cleanBis" depends="jar" description="Clean up class files...">
-    <delete dir="${build-dir}"/>
-    <echo> Compilation of Project ${ant.project.name} **** End </echo>
-    <record name="${basedir}/log/ant_build.log" action="stop"/>
-  </target-->
   <target name="compile" depends="init,clean" description="compile java classes...">
     <javac srcdir="${src-dir}" destdir="${build-dir}" debug="on" optimize="on" target="1.5" source="1.5" fork="true" memoryInitialSize="1g" memoryMaximumSize="1g">
       <compilerarg value="-Xlint:unchecked"/>
       <compilerarg value="-Xlint:deprecation"/>
     </javac>
   </target>
-  <!--target name="prepare4jar" depends="compile" description="prepare directories for jar generation...">
+  <target name="cleandist" depends="compile" description="prepare directories for jar generation...">
     <Create the distribution directory>
     <delete dir="${dist}"/>
     <mkdir dir="${dist}"/>
-    <mkdir dir="${lib-design}/design"/>
-    <mkdir dir="${lib-mas}/mas"/>
-    <mkdir dir="${lib-transport}/transport"/>
-    <copy todir="${lib-design}/design">
-      <fileset dir="${jar-design}"/>
-    </copy>
-    <copy the designer resources to the right directory>
-    <copy todir="${lib-design}/design/props">
-      <fileset dir="${config-resource-dir}/"/>
-    </copy>
-    <copy todir="${lib-design}/design/models">
-      <fileset dir="${model-dir}/"/>
-    </copy>
-    <copy todir="${lib-design}/design/artwork">
-      <fileset dir="${artwork-dir}/"/>
-    </copy>
-    <copy todir="${lib-design}/design/util">
-      <fileset dir="${util-resource-dir}/"/>
-    </copy>
-    <copy todir="${lib-mas}/mas">
-      <fileset dir="${jar-mas}"/>
-    </copy>
-    <copy todir="${lib-transport}/transport">
-      <fileset dir="${jar-transport}"/>
-    </copy>
-  </target-->
-<!-- =================================
-      target: jar Put everything in ${build} into the MyProject-${DSTAMP}.jar file
-     ================================= -->
-  <!--target name="jar" depends="prepare4jar" description="generate the jar files and create symbolic links..." >
-    <jar destfile="${dist}/design-${DSTAMP}.jar" basedir="${lib-design}" manifest="${manifest-dir}/design.mf"/>
-    <symlink link="${lib-dir}/design.jar" resource="${dist}/design-${DSTAMP}.jar" overwrite="true"/>
-    <jar destfile="${dist}/mas-${DSTAMP}.jar" basedir="${lib-mas}" manifest="${manifest-dir}/mas.mf"/>
-    <symlink link="${lib-dir}/mas.jar" resource="${dist}/mas-${DSTAMP}.jar" overwrite="true"/>
-    <jar destfile="${dist}/transport-${DSTAMP}.jar" basedir="${lib-transport}" manifest="${manifest-dir}/transport.mf"/>
-    <symlink link="${lib-dir}/transport.jar" resource="${dist}/transport-${DSTAMP}.jar" overwrite="true"/>
-  </target-->
-
-	<taskdef name="scenarioRunner" classname="org.jbehave.ant.ScenarioRunnerTask" classpathref="your.runtime.classpath" />
-	<scenarioRunner scenarioIncludes="**/scenarios/*.java" scenarioExcludes="**/*Steps.java" classLoaderInjected="[true|false]" skip="[true|false]" ignoreFailure="[true|false]" batch="[true|false] scope="[compile|test]" sourceDirectory="[sourceDirectory|src/main/java]" testSourceDirectory="[testSourceDirectory|src/test/java]" />
-	<taskdef name="renderReports" classname="org.jbehave.ant.ReportRendererTask" classpathref="your.runtime.classpath" />
+  </target>
+<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+  <target name="jar" depends="cleandist" description="generate the jar files and create symbolic links..." >
+    <jar destfile="${dist}/type-equiv-${DSTAMP}.jar" basedir="${build-dir}" manifest="${manifest-dir}/type-equiv.mf"/>
+  </target>
+<!-- Run scenarios the BDD way -->
+  <target name="run-scenarios" description="tests the specification of the API using BDD" >
+	<taskdef name="scenarioRunner" classname="org.jbehave.ant.ScenarioRunnerTask" classpathref="${jbehave-ant}.jar" />
+	<scenarioRunner scenarioIncludes="**/scenarios/*.java" scenarioExcludes="**/*Steps.java" classLoaderInjected="true" skip="false" ignoreFailure="false" batch="[true|false] scope="[compile|test]" sourceDirectory="[sourceDirectory|src/main/java]" testSourceDirectory="[testSourceDirectory|src/test/java]" />
+	<taskdef name="renderReports" classname="org.jbehave.ant.ReportRendererTask" classpathref="${jbehave-ant}.jar" />
 	<renderReports outputDirectory="${basedir}/target/jbehave-reports" formats="txt,html,xml" templateProperties="defaultFormats=stats\nrenderedDirectory=rendered" />
+  </target>
 </project>

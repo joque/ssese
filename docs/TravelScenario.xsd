@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!--
+    Document   : findDistance.xml
+    Created on : May 28, 2010, 8:14 AM
+    Author     : lumala
+    Description: An XML schema for the plan.
+    It gives the various actions in the plan and
+    their respective input types.
+-->
+
+  <xs:element name="searchForFlight">
+    <xs:element name="deptDate" type="xs:date"/>
+    <xs:element name="arvDate" type="xs:date"/>
+    <xs:element name="origin" type="xs:string"/>
+    <xs:element name="destn" type="xs:string"/>
+  </xs:element>
+
+  <xs:element name="bookFlight">
+    <xs:element name="deptDate" type="xs:date"/>
+    <xs:element name="arvDate" type="xs:date"/>
+    <xs:element name="origin" type="xs:string"/>
+    <xs:element name="destn" type="xs:string"/>
+    <xs:element name="vegMeal" type="xs:boolean"/>
+  </xs:element>
+
+  <xs:element name="searchForHotel">
+    <xs:element name="chkinDate" type="xs:date"/>
+    <xs:element name="chkoutDate" type="xs:date"/>
+    <xs:element name="hotelLocation" type="xs:string"/>
+    <xs:element name="roomType" type="xs:string"/>
+   </xs:element>
+
+  <xs:element name="bookHotel">
+    <xs:element name="chkinDate" type="xs:date"/>
+    <xs:element name="chkoutDate" type="xs:date"/>
+    <xs:element name="roomType" type="xs:string"/>
+  </xs:element>
+
+  <xs:element name="searchForCar">
+    <xs:element name="statDate" type="xs:date"/>
+    <xs:element name="endDate" type="xs:date"/>
+    <xs:element name="Address">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="city" type="xs:string"/>
+                <xs:element name="state" type="xs:string"/>
+                <xs:element name="zipcode" type="xs:string"/>
+                <xs:element name="country" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+  </xs:element>
+
+   <xs:element name="rentCar">
+    <xs:element name="statDate" type="xs:date"/>
+    <xs:element name="endDate" type="xs:date"/>
+    <xs:element name="city" type="xs:string"/>
+   </xs:element>
+
+   <xs:element name="findDistance">
+    <xs:element name="statLocation" type="xs:string"/>
+    <xs:element name="endLocation" type="xs:string"/>
+  </xs:element>
+
+</xs:schema>
